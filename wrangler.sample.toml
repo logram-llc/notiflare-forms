@@ -1,0 +1,28 @@
+name = "contact-form"
+main = "src/index.ts"
+compatibility_date = "2022-10-18"
+node_compat = true
+
+# CHANGEME: 
+# https://developers.cloudflare.com/fundamentals/get-started/basic-tasks/find-account-and-zone-ids/
+account_id = "<YOUR_ACCOUNT_ID>"
+send_metrics = false
+
+# CHANGEME: Uncomment if you want support for R2 file uploads
+# r2_buckets  = [
+#  { binding = "R2", bucket_name = "<YOUR_BUCKET_NAME>"}
+# ]
+
+[vars]
+NOTION_DATABASE_ID = ''      # CHANGEME
+NOTION_REQUIRED_COLUMNS = '' # CHANGEME
+# NOTION_INTEGRATION_TOKEN
+
+CORS_ALLOW_ORIGIN = 'https://<YOUR_WEBSITE>' # CHANGEME
+CORS_MAX_AGE = '68400'
+
+# CHANGEME: If you want support for R2 file uploads
+R2_BUCKET_URL = "https://<YOUR_ACCOUNT_ID>.r2.cloudflarestorage.com/<YOUR_BUCKET_NAME>"
+
+# Run `echo "<VALUE>" | wrangler secret put "<NAME>"` for each of these
+# - NOTION_INTEGRATION_TOKEN

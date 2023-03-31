@@ -1,0 +1,76 @@
+openapi: 3.1.0
+info:
+  title: Notion-backed Form API
+  summary: A simple form backend powered by Notion database
+  version: 0.1.0
+paths:
+  /:
+    post:
+      summary: Create a new Notion database entry
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              example: { "name": "Logram", "email": "hi@logram.io", "message": "Drake, where's the door hole?" }
+      responses:
+        '204':
+          description: Successfully created a new database entry
+        '400':
+          description: Bad Request (missing or unexpected fields)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+                    example: ["The following fields must contain a value: name, message", "The following fields were unexpected: fullName"]
+        '405':
+          description: Only POST or OPTIONs requests are allowed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+                    example: ["Only POST requests are allowed."]
+          headers:
+            Allow: 
+              schema:
+                type: string
+        '415':
+          description: Unsupported Media Type (failed to parse request body as form data)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+                      example: ["Failed to parse request body as form data. Send multipart/form-data."]
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+                      example: ["Unknown server error"]
+    options:
+      summary: OPTIONS request
+      responses:
+        '204':
+          description: OPTIONS response
