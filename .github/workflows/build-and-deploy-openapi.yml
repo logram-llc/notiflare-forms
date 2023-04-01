@@ -11,16 +11,13 @@ jobs:
       - name: Generate Swagger UI
         uses: Legion2/swagger-ui-action@524765e0d7cdaa25759f922a23c931af00ebf2f6 # v1.1.6
         with:
-          output: openapi-spec
+          output: openapi-site
           spec-file: docs/openapi.yaml
-      - name: Compress output directory
-        run: |
-          tar -zcvf openapi-spec.tar.gz ./openapi-spec
-          ls -la
       - uses: actions/upload-pages-artifact@64bcae551a7b18bcb9a09042ddf1960979799187 # v1.0.8
         with:
-          path: ./
-          name: openapi-spec.tar.gz
+          path: "./openapi-site"
+          name: openapi-site.tar.gz
+          retention-days: "1"
   deploy:
     runs-on: ubuntu-22.04
     needs: [build]
