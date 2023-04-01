@@ -18,10 +18,7 @@ interface INotionClient {
 }
 
 interface IFileStore {
-  put(
-    key: string,
-    file: File,
-  ): Promise<string>;
+  put(key: string, file: File): Promise<string>;
 }
 
 class FormDataError extends Error {
@@ -158,7 +155,7 @@ class RequestHandler {
     const uploadFile = async (f: File): Promise<string> => {
       const key = crypto.randomUUID();
 
-      return (this.fileStore as IFileStore).put(key, f)
+      return (this.fileStore as IFileStore).put(key, f);
     };
 
     const columnValues: DatabaseValues = {};

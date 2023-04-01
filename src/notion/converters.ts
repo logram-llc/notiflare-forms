@@ -61,10 +61,10 @@ const ColumnConverters: Record<DatabaseColumnType, DatabaseColumnConverter> = {
   },
   [DatabaseColumnType.Files]: (value: string[]): Record<string, unknown> => {
     const toFileColumn = (file: string) => {
-      const fileName = basename(new URL(file).pathname)
+      const fileName = basename(new URL(file).pathname);
 
       if (!fileName) {
-        throw new Error(`Cannot get basename of URL '${file}'`)
+        throw new Error(`Cannot get basename of URL '${file}'`);
       }
 
       return {

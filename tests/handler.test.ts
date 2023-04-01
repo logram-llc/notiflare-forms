@@ -1,7 +1,11 @@
 import { describe, expect, it } from "@jest/globals";
 import each from "jest-each";
 import { SCHEMA_01 } from "./fixtures/notion_database_schemas";
-import { CreateFileStore, CreateNotionClient, CreateRequestHandler } from "./utils";
+import {
+  CreateFileStore,
+  CreateNotionClient,
+  CreateRequestHandler,
+} from "./utils";
 import { readFileSync } from "fs";
 import { join } from "path";
 
@@ -188,74 +192,80 @@ describe("RequestHandler", () => {
   );
 
   it("should upload files to file store if a file store is passed", async () => {
-    const attachment1 = readFileSync(join(__dirname, "./fixtures/files/1.webp"))
-    const attachment2 = readFileSync(join(__dirname, "./fixtures/files/2.webp"))
+    const attachment1 = readFileSync(
+      join(__dirname, "./fixtures/files/1.webp")
+    );
+    const attachment2 = readFileSync(
+      join(__dirname, "./fixtures/files/2.webp")
+    );
 
     const formData = new FormData();
     formData.append("Name", "Test Name");
-    formData.append(
-      "Attachments",
-      new globalThis.Blob([attachment1])
-    );
-    formData.append(
-      "Attachments",
-      new globalThis.Blob([attachment2])
-    );
+    formData.append("Attachments", new globalThis.Blob([attachment1]));
+    formData.append("Attachments", new globalThis.Blob([attachment2]));
 
     const request = new Request("https://logram.io", {
       method: "POST",
       body: formData,
     });
 
-    const notionClient = CreateNotionClient(SCHEMA_01)
-    const databaseSchema = await notionClient.getDatabaseSchema(SCHEMA_01["id"])
+    const notionClient = CreateNotionClient(SCHEMA_01);
+    const databaseSchema = await notionClient.getDatabaseSchema(
+      SCHEMA_01["id"]
+    );
 
-    const fileStoreBaseUrl = "https://example.com/"
+    const fileStoreBaseUrl = "https://example.com/";
     const requestHandler = CreateRequestHandler({
       notionClient,
       requiredFields: "Name",
-      fileStore: CreateFileStore(fileStoreBaseUrl)
+      fileStore: CreateFileStore(fileStoreBaseUrl),
     });
-    const parsedFormData = await requestHandler.formData(request, databaseSchema)
+    const parsedFormData = await requestHandler.formData(
+      request,
+      databaseSchema
+    );
 
-    expect(Object.hasOwn(parsedFormData, "Attachments")).toBe(true)
+    expect(Object.hasOwn(parsedFormData, "Attachments")).toBe(true);
 
-    expect(parsedFormData["Attachments"].length).toBeGreaterThan(0)
-    for(const parsedAttachmentValue of parsedFormData["Attachments"]) {
-      expect(parsedAttachmentValue.startsWith(fileStoreBaseUrl)).toBe(true)
+    expect(parsedFormData["Attachments"].length).toBeGreaterThan(0);
+    for (const parsedAttachmentValue of parsedFormData["Attachments"]) {
+      expect(parsedAttachmentValue.startsWith(fileStoreBaseUrl)).toBe(true);
     }
   });
 
   it("should not upload files if a file store is not passed", async () => {
-    const attachment1 = readFileSync(join(__dirname, "./fixtures/files/1.webp"))
-    const attachment2 = readFileSync(join(__dirname, "./fixtures/files/2.webp"))
+    const attachment1 = readFileSync(
+      join(__dirname, "./fixtures/files/1.webp")
+    );
+    const attachment2 = readFileSync(
+      join(__dirname, "./fixtures/files/2.webp")
+    );
 
     const formData = new FormData();
     formData.append("Name", "Test Name");
-    formData.append(
-      "Attachments",
-      new globalThis.Blob([attachment1])
-    );
-    formData.append(
-      "Attachments",
-      new globalThis.Blob([attachment2])
-    );
+    formData.append("Attachments", new globalThis.Blob([attachment1]));
+    formData.append("Attachments", new globalThis.Blob([attachment2]));
 
     const request = new Request("https://logram.io", {
       method: "POST",
       body: formData,
     });
 
-    const notionClient = CreateNotionClient(SCHEMA_01)
-    const databaseSchema = await notionClient.getDatabaseSchema(SCHEMA_01["id"])
+    const notionClient = CreateNotionClient(SCHEMA_01);
+    const databaseSchema = await notionClient.getDatabaseSchema(
+      SCHEMA_01["id"]
+    );
 
     const requestHandler = CreateRequestHandler({
       notionClient,
       requiredFields: "Name",
     });
-    const parsedFormData = await requestHandler.formData(request, databaseSchema)
+    const parsedFormData = await requestHandler.formData(
+      request,
+      databaseSchema
+    );
 
-    expect(Object.hasOwn(parsedFormData, "Attachments")).toBe(true)
-    expect(parsedFormData.Attachments.length).toBe(0)
+    expect(Object.hasOwn(parsedFormData, "Attachments")).toBe(true);
+    expect(parsedFormData.Attachments.length).toBe(0);
   });
 });
