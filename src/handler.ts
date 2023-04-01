@@ -182,7 +182,9 @@ class RequestHandler {
             }
             if (!(element instanceof File)) {
               throw new FormDataError(
-                this.jsonResponse(400, [`${key} must be either a file or a string`])
+                this.jsonResponse(400, [
+                  `${key} must be either a file or a string`,
+                ])
               );
             }
 
