@@ -1,4 +1,5 @@
 package-lock.json
 README.md
 *.yml
+*.yaml
 *.md
