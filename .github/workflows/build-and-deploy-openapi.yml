@@ -32,4 +32,4 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@73e62e651178eeba977de2dc9f4c7645b3d01015 # v2.0.0
         with:
-          artifact_name: openapi-spec.tar.gz
+          artifact_name: openapi-site.tar.gz
