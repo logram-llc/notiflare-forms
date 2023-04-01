@@ -17,7 +17,7 @@ function CreateFileStore(baseUrl: string): IFileStore {
   const normalizedBaseUrl = baseUrl.endsWith("/") ? baseUrl.slice(0, -1) : baseUrl
 
   class MockFileStore {
-    async put(key: string, _: ReadableStream<any>): Promise<string> {
+    async put(key: string, _: File): Promise<string> {
       return `${normalizedBaseUrl}/${key}`
     }
   }
