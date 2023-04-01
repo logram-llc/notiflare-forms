@@ -1,7 +1,6 @@
-openapi: 3.1.0
+openapi: 3.0.0
 info:
   title: Notion-backed Form API
-  summary: A simple form backend powered by Notion database
   version: 0.1.0
 paths:
   /:
