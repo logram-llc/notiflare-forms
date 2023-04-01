@@ -10,7 +10,7 @@ send_metrics = false
 
 # CHANGEME: Uncomment if you want support for R2 file uploads
 # r2_buckets  = [
-#  { binding = "R2", bucket_name = "<YOUR_BUCKET_NAME>"}
+#  { binding = "R2", bucket_name = "<YOUR_BUCKET_NAME>", preview_bucket_name = "<YOUR_PREVIEW_BUCKET_NAME>" }
 # ]
 
 [vars]

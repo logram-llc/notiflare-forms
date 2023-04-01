@@ -201,8 +201,14 @@ describe("RequestHandler", () => {
 
     const formData = new FormData();
     formData.append("Name", "Test Name");
-    formData.append("Attachments", new globalThis.Blob([attachment1]));
-    formData.append("Attachments", new globalThis.Blob([attachment2]));
+    formData.append(
+      "Attachments",
+      new File([attachment1], "attachment1.webp", { type: "image/webp" }),
+    );
+    formData.append(
+      "Attachments",
+      new File([attachment2], "attachment2.webp", { type: "image/webp" }),
+    );
 
     const request = new Request("https://logram.io", {
       method: "POST",
@@ -243,8 +249,8 @@ describe("RequestHandler", () => {
 
     const formData = new FormData();
     formData.append("Name", "Test Name");
-    formData.append("Attachments", new globalThis.Blob([attachment1]));
-    formData.append("Attachments", new globalThis.Blob([attachment2]));
+    formData.append("Attachments", new File([attachment1], "attachment1.webp", { type: "image/webp" }),);
+    formData.append("Attachments", new File([attachment2], "attachment2.webp", { type: "image/webp" }),);
 
     const request = new Request("https://logram.io", {
       method: "POST",

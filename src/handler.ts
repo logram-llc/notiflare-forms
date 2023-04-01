@@ -181,7 +181,9 @@ class RequestHandler {
               continue;
             }
             if (!(element instanceof File)) {
-              continue;
+              throw new FormDataError(
+                this.jsonResponse(400, [`${key} must be either a file or a string`])
+              );
             }
 
             value[index] = await uploadFile(element);
