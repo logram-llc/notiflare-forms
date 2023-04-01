@@ -44,7 +44,7 @@ class NotionClient {
   async retrieveDatabase(databaseID: string): Promise<GetDatabaseResponse> {
     return this.apiClient.databases.retrieve({
       database_id: databaseID,
-    }); 
+    });
   }
 
   async createDatabasePage(page: DatabasePage): Promise<void> {
@@ -52,7 +52,7 @@ class NotionClient {
   }
 
   async getDatabaseSchema(databaseID: string): Promise<DatabaseSchema> {
-    const res = await this.retrieveDatabase(databaseID)
+    const res = await this.retrieveDatabase(databaseID);
 
     return Object.values(res.properties).reduce((acc, { name, type }) => {
       acc[name] = {

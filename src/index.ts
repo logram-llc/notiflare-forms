@@ -6,10 +6,7 @@ import { R2FileStore } from "./file_store";
 export { IEnv as Env };
 
 export default {
-  async fetch(
-    request: Request,
-    env: IEnv
-  ): Promise<Response> {
+  async fetch(request: Request, env: IEnv): Promise<Response> {
     const notionClient = new NotionClient(env.NOTION_INTEGRATION_TOKEN);
     const fileStore =
       Boolean(env.R2) && Boolean(env.R2_BUCKET_URL)

@@ -1,4 +1,9 @@
-type FileStoreData = string | ReadableStream<any> | ArrayBuffer | ArrayBufferView | Blob
+type FileStoreData =
+  | string
+  | ReadableStream<any>
+  | ArrayBuffer
+  | ArrayBufferView
+  | Blob;
 
 interface IFileStore {
   put(key: string, data: FileStoreData): Promise<string>;
@@ -30,4 +35,4 @@ class R2FileStore implements IFileStore {
 }
 
 export { R2FileStore };
-export type { FileStoreData }
+export type { FileStoreData };

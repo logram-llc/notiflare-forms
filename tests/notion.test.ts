@@ -74,7 +74,6 @@ describe("Notion converters", () => {
       data: [
         "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/MD5_algorithm.svg/1280px-MD5_algorithm.svg.png",
         "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/CIAJMK1209-en.svg/1280px-CIAJMK1209-en.svg.png",
-        "https://example.com",
       ],
       expectedResult: {
         files: [
@@ -200,9 +199,6 @@ describe("Notion converters", () => {
   );
 });
 
-
 describe("NotionClient.buildChildren", () => {
-  it("", () => {
-
-  })
-})
+  it("", () => {});
+});

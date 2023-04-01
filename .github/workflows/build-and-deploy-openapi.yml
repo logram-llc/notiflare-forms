@@ -1,0 +1,35 @@
+name: Build & Deploy OpenAPI Github Page
+on:
+  push: 
+    tags:
+      - "v*"
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3 # v3.5.0
+      - name: Generate Swagger UI
+        uses: Legion2/swagger-ui-action@524765e0d7cdaa25759f922a23c931af00ebf2f6 # v1.1.6
+        with:
+          output: openapi-site
+          spec-file: docs/openapi.yaml
+      - uses: actions/upload-pages-artifact@64bcae551a7b18bcb9a09042ddf1960979799187 # v1.0.8
+        with:
+          path: "./openapi-site"
+          name: openapi-site.tar.gz
+          retention-days: "1"
+  deploy:
+    runs-on: ubuntu-22.04
+    needs: [build]
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      pages: write      # to deploy to Pages
+      id-token: write   # to verify the deployment originates from an appropriate source
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@73e62e651178eeba977de2dc9f4c7645b3d01015 # v2.0.0
+        with:
+          artifact_name: openapi-site.tar.gz
