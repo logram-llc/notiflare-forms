@@ -21,7 +21,7 @@ class R2FileStore implements IFileStore {
   }
 
   async put(key: string, data: File): Promise<string> {
-    await this.bucket.put(key, data, {
+    await this.bucket.put(key, data.stream(), {
       httpMetadata: {
         contentType: data.type,
       },
