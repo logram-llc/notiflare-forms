@@ -172,3 +172,7 @@ See [Configuring Cloudflare Rate Limiting](https://developers.cloudflare.com/waf
 | Phone | No                        |  | `479-370-0008`      |
 
 Fields of type `Files & media` are only supported if an R2 bucket is bound to the worker ([see more](#file-uploads-via-cloudflare-r2)).
+
+---
+
+Made with ❤️ by [Logram](https://logram.io) 
