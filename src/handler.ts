@@ -173,7 +173,8 @@ class RequestHandler {
 
         const value = formData!
           .getAll(key)
-          .filter((v) => canUpload || (!canUpload && !(v instanceof File))); // Strip Files if they cannot upload
+          .filter((v) => canUpload || (!canUpload && !(v instanceof File))) // Strip Files if they cannot upload
+          .filter((v) => Boolean(v)) // Strip empty strings
 
         if (canUpload) {
           for (const [index, element] of value.entries()) {
