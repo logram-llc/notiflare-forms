@@ -4,6 +4,8 @@ A simple form backend powered by a Notion database and a Cloudflare Worker
 
 All you need to do is create a Notion database whose columns match your form, deploy the Cloudflare Worker, and then point your form to that worker's URL.
 
+![Demo](.github/readme/demo.gif)
+
 ## Quick Start
 
 1. Create a [Notion database](#notion-database) whose columns will act as your form's fields, with the column's name being the form field's name.
